@@ -5,8 +5,8 @@ public class GameApp {
 		StartFrame startFrame = new StartFrame();
 
 	}
-	public void run() {
-		
+	public static void run() {
+		GameFrame gameFrame = new GameFrame();
 	}
 
 }

@@ -1,16 +1,19 @@
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class StartPanel extends JPanel{
 	// 시작화면 버튼들
 	private JButton startBtn = new JButton("게임시작");
-	private JButton lankingBtn = new JButton("랭킹보기");
+	private JButton rankingBtn = new JButton("랭킹보기");
 	private JButton addWordBtn = new JButton("단어편집");
 	private JButton helpBtn = new JButton("도움말");
 	// 타이틀 
@@ -42,10 +45,10 @@ public class StartPanel extends JPanel{
 		startBtn.setLocation(400, 500);
 		add(startBtn);
 		// 랭킹보기버튼
-		lankingBtn.setSize(200,50);
-		lankingBtn.setFont(new Font("휴먼엑스포",Font.PLAIN, 20));
-		lankingBtn.setLocation(400, 560);
-		add(lankingBtn);
+		rankingBtn.setSize(200,50);
+		rankingBtn.setFont(new Font("휴먼엑스포",Font.PLAIN, 20));
+		rankingBtn.setLocation(400, 560);
+		add(rankingBtn);
 		
 		// 단어편집버튼
 		addWordBtn.setSize(200,50);
@@ -59,7 +62,21 @@ public class StartPanel extends JPanel{
 		helpBtn.setLocation(400, 680);
 		add(helpBtn);
 		
+		startBtn.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				LoginModal loginModal = new LoginModal(StartPanel.this.getStartFrame());
+			}
+			
+		});
+		
+		
+		
 		
 	}
+    public StartFrame getStartFrame() {
+        return (StartFrame) SwingUtilities.getWindowAncestor(this);
+    }
+
+	
 
 }
