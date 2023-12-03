@@ -32,8 +32,6 @@ public class GamePanel extends JPanel{
 	private JLabel timeLabel;
 	
 	private JTextField inputField;
-	// 스레드
-	private BeforeStartThread beforeStartThread = null;
 	
 	
 	// 생성자
@@ -107,5 +105,9 @@ public class GamePanel extends JPanel{
 			add(inputField);
 			
 		}
+	}
+	// 3초 카운트 세는 메소드
+	public void startCountDown() {
+		
 	}
 }

@@ -21,6 +21,8 @@ public class GameFrame extends JFrame {
 		c = getContentPane();
 		
 		splitPane();
+		
+		profileAndItemPanel.startCountDown();
 	}
 	
 	// 스플릿팬 생성 함수(영역 나누기)
