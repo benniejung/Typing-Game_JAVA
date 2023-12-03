@@ -86,8 +86,6 @@ public class LoginModal extends JDialog{
 		confirmBtn.setFont(new Font("Dialog", Font.BOLD, 20));
 		c.add(confirmBtn);
 		
-		
-
 	}
 	private void allEventListener() {
 		// 확인 버튼을 클릭했을 때 이벤트 발생
