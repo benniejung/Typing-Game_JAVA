@@ -15,7 +15,7 @@ public class ProfileAndItemPanel extends JPanel{
 
 	// 스레드
 	private StartCountThread startCountThread = null;
-	private TimerThread timerThread = new TimerThread(this,timeLabel, minLabel, divLabel, secLabel);
+	//private TimerThread timerThread = new TimerThread(this,timeLabel, minLabel, divLabel, secLabel);
 	private GameThread gameThread = null;
 	
 	// 생성자
@@ -33,11 +33,27 @@ public class ProfileAndItemPanel extends JPanel{
 //	public void setGamePanel(GamePanel gamePanel) {
 //        this.gamePanel = gamePanel;
 //    }
-	// 3초 카운트 세는 메소드
-	public void startCountDown() {
-		startCountThread = new StartCountThread(this, timeLabel);
-		startCountThread.start();
+	
+	public JLabel getTimeLabel() {
+		return timeLabel;
 	}
+	public JLabel getMinLabel() {
+		return minLabel;
+	}
+
+	public JLabel getSecLabel() {
+		return secLabel;
+	}
+	public JLabel getDivLabel() {
+		return divLabel;
+	}
+
+	
+	// 3초 카운트 세는 메소드
+//	public void startCountDown() {
+//		startCountThread = new StartCountThread(this, timeLabel);
+//		startCountThread.start();
+//	}
 	
 	// 타이머 그리는 메소드
 	public void timerUI() {
@@ -58,9 +74,9 @@ public class ProfileAndItemPanel extends JPanel{
         repaint();
 	}
 	// 타이머 메소드
-	public void timerStart() {
-		timerThread.start();
-	}
+//	public void timerStart() {
+//		timerThread.start();
+//	}
 
 
 }

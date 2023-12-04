@@ -22,7 +22,7 @@ public class GameFrame extends JFrame {
 		
 		splitPane();        
         
-		profileAndItemPanel.startCountDown();
+		gamePanel.startCountDown();
 	}
 	
 	// 스플릿팬 생성 함수(영역 나누기)

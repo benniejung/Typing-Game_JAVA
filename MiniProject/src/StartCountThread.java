@@ -11,12 +11,20 @@ public class StartCountThread extends Thread{
 	private int count = 3;
 	
 	// 생성자
-	public StartCountThread(ProfileAndItemPanel profileAndItemPanel, JLabel timeLabel) {
+//	public StartCountThread(ProfileAndItemPanel profileAndItemPanel, JLabel timeLabel) {
+//		this.profileAndItemPanel = profileAndItemPanel;
+//		this.timeLabel = timeLabel;
+//
+//		
+//	}
+	public StartCountThread(GamePanel gamePanel, ProfileAndItemPanel profileAndItemPanel, JLabel timeLabel) {
 		this.profileAndItemPanel = profileAndItemPanel;
 		this.timeLabel = timeLabel;
+		this.gamePanel = gamePanel;
 
 		
 	}
+
 	
 	@Override
 	public void run() {
@@ -32,8 +40,10 @@ public class StartCountThread extends Thread{
 			}
 			catch (InterruptedException e) { // interrupt 받으면
 				// profileAndItemPanel.startGame(); // 게임 시작
-				profileAndItemPanel.timerUI(); // 게임 타이머 그리기
-				profileAndItemPanel.timerStart(); // 게임 타이머 스레드 시작
+				gamePanel.timerUI(); // 게임 타이머 그리기
+				gamePanel.timerStart(); // 게임 타이머 스레드 시작
+				gamePanel.startGame();
+				
 				
 				
 				return;

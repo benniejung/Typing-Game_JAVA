@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 
 public class TimerThread extends Thread{
 	// 생성자에게 전달 위한 레퍼런스 선언
+	private GamePanel gamePanel = null;
 	private ProfileAndItemPanel profileAndItemPanel = null;
 	private JLabel timeLabel = null;
 	private JLabel minLabel = null;
@@ -14,7 +15,8 @@ public class TimerThread extends Thread{
 	private int min,sec,t = 0;
 	
 
-	public TimerThread(ProfileAndItemPanel profileAndItemPanel, JLabel timeLabel, JLabel minLabel, JLabel divLabel, JLabel secLabel) {
+	public TimerThread(GamePanel gamePanel, ProfileAndItemPanel profileAndItemPanel, JLabel timeLabel, JLabel minLabel, JLabel divLabel, JLabel secLabel) {
+		this.gamePanel = gamePanel;
 		this.profileAndItemPanel = profileAndItemPanel;
 		this.timeLabel = timeLabel;
 		this.minLabel = minLabel;
