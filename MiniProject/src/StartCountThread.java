@@ -5,6 +5,7 @@ public class StartCountThread extends Thread{
 	// 생성자에게 전달 위한 레퍼런스 선언
 	private ProfileAndItemPanel profileAndItemPanel = null;
 	private JLabel timeLabel = null;
+	private GamePanel gamePanel = null;
 	
 	// 카운트 변수
 	private int count = 3;
@@ -13,7 +14,7 @@ public class StartCountThread extends Thread{
 	public StartCountThread(ProfileAndItemPanel profileAndItemPanel, JLabel timeLabel) {
 		this.profileAndItemPanel = profileAndItemPanel;
 		this.timeLabel = timeLabel;
-		
+
 		
 	}
 	
@@ -33,6 +34,7 @@ public class StartCountThread extends Thread{
 				// profileAndItemPanel.startGame(); // 게임 시작
 				profileAndItemPanel.timerUI(); // 게임 타이머 그리기
 				profileAndItemPanel.timerStart(); // 게임 타이머 스레드 시작
+				
 				
 				return;
 			}

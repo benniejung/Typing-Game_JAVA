@@ -1,5 +1,7 @@
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -80,7 +82,7 @@ public class LoginModal extends JDialog{
 		engBtn.setBounds(170,130,150,30);
 		engBtn.setFont(new Font("Dialog", Font.PLAIN, 20));
 		c.add(engBtn);
-		
+
 		// 확인 버튼 크기, 위치, 폰트 설정
 		confirmBtn.setBounds(150, 200, 100, 30);
 		confirmBtn.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -88,6 +90,14 @@ public class LoginModal extends JDialog{
 		
 	}
 	private void allEventListener() {
+		// 단어선택 라디오버튼을 클릭했을 때 이벤트 발생
+		engBtn.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(engBtn.isSelected()) {
+					GameManagement.pathName = "words.txt";
+				}
+			}
+		});
 		// 확인 버튼을 클릭했을 때 이벤트 발생
 		confirmBtn.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -100,9 +110,10 @@ public class LoginModal extends JDialog{
 					LanguageAlertModal languageAlertModal = new LanguageAlertModal();
 				}
 				else { // 모두 입력이 되었을 경우
-					dispose();
-					startFrame.setVisible(false);
-					GameApp.run();
+					GameManagement.userName = name;
+					dispose(); // 모달창 닫기
+					startFrame.setVisible(false); // 시작화면 안보이게
+					GameApp.run(); // 게임화면 보이게
 				}
 			}
 			

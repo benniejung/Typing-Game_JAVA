@@ -19,8 +19,8 @@ public class StartPanel extends JPanel{
 	// 타이틀 
 	private JLabel titleLabel = new JLabel("상찌를 구해줘!");
 	
-	private ImageIcon startBgIcon = new ImageIcon("greenBg.jpg");
-	private ImageIcon characIcon1 = new ImageIcon("상찌.png");
+	private ImageIcon startBgIcon = new ImageIcon("images/greenBg.jpg");
+	private ImageIcon characIcon1 = new ImageIcon("images/상찌.png");
 	
 	public void paintComponent(Graphics g) {
 		Image startBgImg = startBgIcon.getImage();

@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class LifePanel extends JPanel{
-	private ImageIcon lifeIcon = new ImageIcon("생명.png");
+	private ImageIcon lifeIcon = new ImageIcon("images/생명.png");
 	private Image lifeImg = lifeIcon.getImage();
 	
 	// 생성자

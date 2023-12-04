@@ -8,7 +8,7 @@ import javax.swing.JSplitPane;
 public class GameFrame extends JFrame {
 	private Container c;
 	private PauseAndBackPanel pauseAndBackPanel = new PauseAndBackPanel();
-	private ProfileAndItemPanel profileAndItemPanel = new ProfileAndItemPanel();
+	private ProfileAndItemPanel profileAndItemPanel = new ProfileAndItemPanel(); 
 	private GamePanel gamePanel = new GamePanel(this, pauseAndBackPanel, profileAndItemPanel);
 	
 	public GameFrame() {
@@ -20,8 +20,8 @@ public class GameFrame extends JFrame {
 		
 		c = getContentPane();
 		
-		splitPane();
-		
+		splitPane();        
+        
 		profileAndItemPanel.startCountDown();
 	}
 	

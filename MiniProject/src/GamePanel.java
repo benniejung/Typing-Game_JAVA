@@ -5,6 +5,10 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -12,6 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GamePanel extends JPanel{
+	// 상수
+	private final int labelWidth = 80;
+	private final int labelHeight = 50;
+	
+	
+	
 	private GameFrame gameFrame = null;
 	private PauseAndBackPanel pauseAndBackPanel = null;
 	private ProfileAndItemPanel profileAndItemPanel = null;
@@ -21,17 +31,25 @@ public class GamePanel extends JPanel{
 	
 	// 이미지
 	private ImageIcon lifeIcon = new ImageIcon("생명.png");
-	private ImageIcon gameBgIcon = new ImageIcon("gameBg2.png");
+	private ImageIcon gameBgIcon = new ImageIcon("images/gameBg3.jpg");
 	
 	Image lifeImg = lifeIcon.getImage();
 	Image gameBgImg = gameBgIcon.getImage();
 	
-	// 라벨
+	// 레이블
 	private JLabel lifeLabel = new JLabel("생명");
 	private JLabel scoreLabel = new JLabel();
 	private JLabel timeLabel;
 	
 	private JTextField inputField;
+	
+	// 스레드
+	private GameThread gameThread = null;
+	
+	// 단어파일 저장 vector
+	private Vector<String> wordList = new Vector<String>();
+	// 단어파일 vector에서 랜덤으로 선택된 단어 저장 vector
+	private Vector<Word> chosenWords = new Vector<Word>();
 	
 	
 	// 생성자
@@ -46,8 +64,10 @@ public class GamePanel extends JPanel{
 		makeLifePanel();
 		makeMainPlayPanel();
 		makeInputWordPanel();
+		
+		saveWordToVector(); // 단어 벡터에 저장
 	}
-			
+	
 	// 생명 패널을 위쪽에 부착
 	public void makeLifePanel() {
 		lifePanel = new LifePanel();
@@ -106,8 +126,41 @@ public class GamePanel extends JPanel{
 			
 		}
 	}
-	// 3초 카운트 세는 메소드
-	public void startCountDown() {
-		
+	
+	// 선택한 단어파일 벡터에 저장하는 메소드
+	public void saveWordToVector() {
+		try {FileReader fin=new FileReader(GameManagement.pathName);
+		BufferedReader bf=new BufferedReader(fin);
+		String line="";
+		while((line=bf.readLine())!=null) {
+			wordList.add(line);
+		}}catch(IOException e) {System.out.println("파일이 없습니다.");};
 	}
+	// wordList에서 랜덤으로 단어 한 개 불러오기
+	public String getWord()  {
+		int r = (int)(Math.random()* wordList.size());
+		return wordList.get(r);
+	}
+	// 선택된 단어 저장
+	public void chooseWord() {
+		int x = (int)(Math.random()*500);
+		Word word = new Word(getWord(), x, 0);
+		chosenWords.add(word);
+		addLabel(word);
+	}
+	// 선택된 단어 레이블을 패널에 부착하는 메소드
+	public void addLabel(Word word) {
+		JLabel wordLabel = new JLabel(word.getWordStr());
+		wordLabel.setFont(new Font("Dialog", Font.PLAIN, 10));
+		wordLabel.setSize(labelWidth,labelHeight);
+		wordLabel.setLocation(word.getX(), 0);
+		playPanel.add(wordLabel);
+	}
+	// 게임시작 메소드
+	public void startGame() {
+		gameThread = new GameThread();
+		gameThread.start();
+	}
+
+	
 }
