@@ -7,17 +7,17 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Iterator;
 import java.util.Vector;
 
 public class GamePanel extends JPanel {
 		
     private static int MAX_WORDS = 30;
-    public static int fontRandSize = 10;
     private final int LABEL_WIDTH = 150;
     private final int LABEL_HEIGHT = 40;
 
-    private ImageIcon icon;
     private ImageIcon bgIcon1;
     private ImageIcon bgIcon2;
     private ImageIcon sangjjiIcon;
@@ -53,6 +53,9 @@ public class GamePanel extends JPanel {
     
     // 랭킹 확인 프레임을 생성을 위한 레퍼런스 선언
     private RankingFrame RankingFrame;
+    
+    // 점수 기록 파일
+    private File file = new File("record/record.txt");	
 	
     // 생성자
     public GamePanel(GameFrame gameFrame, WordList wordList, ProfileAndScorePanel profileAndScorePanel, Audio audio) {
@@ -89,14 +92,10 @@ public class GamePanel extends JPanel {
         
     }
     
-    // 입력 영역을 아래쪽에 부착
-    private void makeInputPanel() {
-    	
-    	
-    }
+    // 입력칸과 캐릭터패널을 게임화면 아래쪽에 부착
     public class PlayBottomField extends JPanel{
     	private GamePanel gamePanel;
-    	private ImageIcon goatIcon = new ImageIcon("image/character/염소.png");
+    	private ImageIcon goatIcon = new ImageIcon("image/character/염소1.png");
     	private JLabel goatLabel = new JLabel(goatIcon); // 염소이미지 레이블을 만든다
     	private int x = 50,y = 0; 
     	private int setX = 0; // 현재 염소의 위치
@@ -130,8 +129,6 @@ public class GamePanel extends JPanel {
     		goatLabel.setSize(80,80);
     		goatLabel.setLocation(0,y);
     		this.add(goatLabel);
-
-	        // add(gamePanel, BorderLayout.SOUTH);
 
     	}
     	// 염소 움직이게 하는 메소드
@@ -171,7 +168,11 @@ public class GamePanel extends JPanel {
                     	else if(word.getAbility() == 2) { // 파란색 단어를 입력하면
                     		playBottomField.setGoatLocation(); // 염소를 처음 위치로 다시 옮긴다
                     	}
-                    	profileAndScorePanel.increase(); // 점수 증가
+                    	else if(word.getAbility() == 3) { // 핑크색 단어를 입력하면
+                    		profileAndScorePanel.scoreIncrease(); // 점수를 증가시킨다
+                    	}
+
+                    	profileAndScorePanel.scoreIncrease(); // 점수 증가
                         word.setY(MainPlayPanel.getHeight()); // 단어를 아래에 배치
                         profileAndScorePanel.setNormalProfileImage(); // 표정 바꾸기
                         Audio playcorrect = new Audio(); // 효과음을 나타내기 위해 오디오 객체 생성
@@ -180,7 +181,7 @@ public class GamePanel extends JPanel {
                     }
                 }
                 if (!isCorrect) { // 단어가 일치하지 않는다면
-                	profileAndScorePanel.decrease(); // 점수 감소
+                	profileAndScorePanel.scoreDecrease(); // 점수 감소
                 	profileAndScorePanel.setSadProfileImage(); // 표정 바꾸기
                 	Audio playwrong = new Audio(); // 효과음을 나타내기 위해 오디오 객체 생성
                 	playwrong.playAudio("wrong"); // 효과음 발생
@@ -213,13 +214,13 @@ public class GamePanel extends JPanel {
 	public void timerUI() {
 		timePanel.remove(timeLabel);
 		minLabel.setBounds(200, 10, 300, 30); // 분
-		minLabel.setFont(new Font("휴먼엑스포", Font.PLAIN, 30));
+		minLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 30));
 		
 		divLabel.setBounds(250, 10, 300, 30); // :
-		divLabel.setFont(new Font("휴먼엑스포", Font.PLAIN, 30));
+		divLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 30));
 		
 		secLabel.setBounds(300, 10, 300, 30); // 초
-		secLabel.setFont(new Font("휴먼엑스포", Font.PLAIN, 30));
+		secLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 30));
 
         timePanel.add(minLabel);
         timePanel.add(divLabel);
@@ -247,11 +248,25 @@ public class GamePanel extends JPanel {
     		GameResultModal gameResultModal = new GameResultModal(minLabel.getText(), secLabel.getText());
     		//gameFrame.dispose(); // gameFrame 종료
     		GameManagement.score = profileAndScorePanel.getScore();
+    		recordScore(); // 이름, 점수, 시간 기록
     		RankingFrame = new RankingFrame(profileAndScorePanel);// 랭킹 확인 프레임 띄우기
     		audio.playAudio("gameEnded"); // 게임 종료 배경 음악 시작
 		}
 		
 	}
+    // 점수 기록 메소드
+	private void recordScore() {
+		try {
+			//파일에 문자열을 쓴다
+			FileWriter fw = new FileWriter(file, true);
+			fw.write(GameManagement.name +"/"+ Integer.toString(GameManagement.score) + "/" + minLabel.getText() + "/" + secLabel.getText() + "/" + "\r\n");
+            fw.close();
+			System.out.println("점수 저장 완료.");
+		} catch (Exception e) {
+			System.out.println("파일 오퓨 ");
+		}
+	}
+
 
     // 게임 중지 메소드
     public void stopGame() {
@@ -294,6 +309,7 @@ public class GamePanel extends JPanel {
         label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
         label.setSize(LABEL_WIDTH, LABEL_HEIGHT);
         label.setLocation(getX(), 0);
+        // 색상 단어 생성
         if(word.getAbility() == 0) {
         	label.setForeground(Color.black);
         }
@@ -337,15 +353,7 @@ public class GamePanel extends JPanel {
     	private GamePanel gamePanel;
     	private MainPlayPanel mainPlayPanel;
     	public CharacMoveThread(GamePanel gamePanel, MainPlayPanel mainPlayPanel) {
-//    		this.gamePanel = gamePanel;
-//    		this.mainPlayPanel = mainPlayPanel;
-//    		
-//        	sangjjiIcon = new ImageIcon("image/character/상찌_small.png");
-//        	this.sangjjiLabel = new JLabel(sangjjiIcon);
-//        	this.sangjjiLabel.setSize(50,50);
-//        	this.sangjjiLabel.setLocation(700,700);
-//        	mainPlayPanel.add(sangjjiLabel);
-
+    		
     	}
     	public void run() {
     		
@@ -365,20 +373,7 @@ public class GamePanel extends JPanel {
     	// 생성자
         public MainPlayPanel() { 
         }
-        
-        // 게임 배경 화면 받아오는 메소드
-//*        public Image getBackgroundImage() {
-//        	
-//        	if(GameManagement.profile.equals("SpongebobSquarepants")) {
-//        		icon = new ImageIcon("image/background/SpongebobBackground.png");
-//        		return icon.getImage();
-//        	}
-//        	else {
-//        		icon = new ImageIcon("image/background/PatrickStarBackground.png");
-//        		return icon.getImage();
-//        	}
-//        }
-       
+               
     }
 
 }

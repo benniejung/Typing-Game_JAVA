@@ -13,7 +13,6 @@ public class ProfileAndScorePanel extends JPanel {
 	private Font defaultFont = new Font("맑은 고딕", Font.BOLD, 30); 
 
 	public static int score = 0;
-	// private JLabel nameLabel = new JLabel(GameManagement.name);
 	private JLabel scoreLabel = new JLabel(Integer.toString(score));
 	private JLabel lifeLabel;
 	
@@ -105,39 +104,19 @@ public class ProfileAndScorePanel extends JPanel {
 	public void setSadProfileImage() { profileLabel.setIcon(wrongProfileImage); }
 	
 	// 점수 증가 메소드
-	public void increase() { 
-		
-		// 난이도에 따라 증가하는 점수가 다름
+	public void scoreIncrease() { 
 		if (GameManagement.difficulty.equals("Normal")) {
 			score += 15;
 			scoreLabel.setText(Integer.toString(getScore())); 
-		}
-		else if (GameManagement.difficulty.equals("Hard")) {
-			score += 20;
-			this.scoreLabel.setText(Integer.toString(getScore())); 
-		}
-		else {
-			score += 10;
-			scoreLabel.setText(Integer.toString(getScore()));
 		}
 		
 	}
 	
 	// 점수 감소 메소드
-	public void decrease() { 
-		
-		// 난이도에 따라 감소하는 점수가 다름
+	public void scoreDecrease() { 
 		if (GameManagement.difficulty.equals("Normal")) {
-			score -= 15;
-			scoreLabel.setText(Integer.toString(getScore())); 
-		}
-		else if (GameManagement.difficulty.equals("Hard")) {
-			score -= 20;
-			scoreLabel.setText(Integer.toString(getScore())); 
-		}
-		else {
 			score -= 10;
-			scoreLabel.setText(Integer.toString(getScore()));
+			scoreLabel.setText(Integer.toString(getScore())); 
 		}
 		
 	}
