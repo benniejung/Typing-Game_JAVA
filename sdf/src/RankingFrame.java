@@ -16,8 +16,7 @@ public class RankingFrame extends JFrame {
 	private RankingPanel rankingPanel;
 	
 	// 생성자
-	public RankingFrame(ProfileAndScorePanel profileAndScorePanel) {
-		this.profileAndScorePanel = profileAndScorePanel;
+	public RankingFrame() {
 		rankingPanel = new RankingPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

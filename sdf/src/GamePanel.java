@@ -249,7 +249,7 @@ public class GamePanel extends JPanel {
     		//gameFrame.dispose(); // gameFrame 종료
     		GameManagement.score = profileAndScorePanel.getScore();
     		recordScore(); // 이름, 점수, 시간 기록
-    		RankingFrame = new RankingFrame(profileAndScorePanel);// 랭킹 확인 프레임 띄우기
+    		RankingFrame = new RankingFrame();// 랭킹 확인 프레임 띄우기
     		audio.playAudio("gameEnded"); // 게임 종료 배경 음악 시작
 		}
 		

@@ -27,6 +27,7 @@ public class StartPanel extends JPanel{
 	private JButton startBtn = new JButton(new ImageIcon("image/button/시작버튼.png"));
 	private JButton rankingBtn = new JButton("랭킹보기", rankingIcon);
 	private JButton helpBtn = new JButton("도움말", infoIcon);
+	RankingFrame ranking;
 
 
 
@@ -89,7 +90,13 @@ public class StartPanel extends JPanel{
 			}
 			
 		});
-		
+		rankingBtn.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				ranking = new RankingFrame();
+			}
+			
+		});
+	
 		
 		
 		
