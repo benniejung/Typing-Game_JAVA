@@ -53,7 +53,6 @@ public class GamePanel extends JPanel {
     
     // 랭킹 확인 프레임을 생성을 위한 레퍼런스 선언
     private RankingFrame RankingFrame;
-    private UserRankingFrame userRankingFrame;
 	
     // 생성자
     public GamePanel(GameFrame gameFrame, WordList wordList, ProfileAndScorePanel profileAndScorePanel, Audio audio) {
@@ -82,6 +81,8 @@ public class GamePanel extends JPanel {
     	
     	timePanel = new JPanel();
         timePanel.setBackground(Color.white);
+        Color borderColor = new Color(21,40,90);
+        timePanel.setBorder(BorderFactory.createLineBorder(borderColor, 5));
         timeLabel.setFont(new Font("맑은 고딕", Font.BOLD, 30));
         timePanel.add(timeLabel);
         add(timePanel, BorderLayout.NORTH);
@@ -103,7 +104,7 @@ public class GamePanel extends JPanel {
     	@Override
     	public void paintComponent(Graphics g) {
     		super.paintComponent(g);
-    		bgIcon2 = new ImageIcon("image/background/playBg2.jpg");
+    		bgIcon2 = new ImageIcon("image/background/bg2.png");
     		
     		g.drawImage(bgIcon2.getImage(), 0, 0, getWidth(), getHeight(), this);
     	}
@@ -123,7 +124,7 @@ public class GamePanel extends JPanel {
 		    this.add(sangjjiLabel);
 		    // 입력필드
 		    inputField.setSize(230, 30);
-		    inputField.setLocation(200, 100);
+		    inputField.setLocation(250, 100);
 	        this.add(inputField);
 	        // 염소 레이블
     		goatLabel.setSize(80,80);
@@ -356,7 +357,7 @@ public class GamePanel extends JPanel {
     	@Override
     	public void paintComponent(Graphics g) {
     		super.paintComponent(g);
-    		bgIcon1 = new ImageIcon("image/background/playBg1.jpg");
+    		bgIcon1 = new ImageIcon("image/background/bg.png");
     		
     		g.drawImage(bgIcon1.getImage(), 0, 0, getWidth(), getHeight(), this);
     	}

@@ -33,6 +33,7 @@ public class StartFrame extends JFrame {
 			setResizable(false); // 컨텐트팬 크기 조절 못하게
 		
 			audio.playAudio("startFrame");
+			// makeMenu();
 		
 			isFirstExecute = false;
 			
@@ -40,85 +41,73 @@ public class StartFrame extends JFrame {
 		
 	} 
 	
-//	private void makeMenu() {
-//		
-//		JMenuBar menuBar = new JMenuBar();
-//		this.setJMenuBar(menuBar);
-//		
-//		// 메뉴
-//		JMenu fileMenu = new JMenu("File");
-//		JMenu soundMenu = new JMenu("Sound");
-//		
-//		// 메뉴를 메뉴바에 부착
-//		menuBar.add(fileMenu); 
-//		menuBar.add(soundMenu);
-//		
-//		// 메뉴 아이템
-//		JMenuItem wordsItem = new JMenuItem("words.txt");
-//		JMenuItem toeicwordsItem = new JMenuItem("toeicwords.txt");
-//		
-//		JMenuItem soundOnItem = new JMenuItem("sound on");
-//		JMenuItem soundOffItem = new JMenuItem("sound off");
-//		
-//		// 메뉴 아이템을 메뉴에 부착
-//		fileMenu.add(wordsItem);
-//		fileMenu.addSeparator();
-//		fileMenu.add(toeicwordsItem);
-//		soundMenu.add(soundOnItem);
-//		soundMenu.addSeparator(); 
-//		soundMenu.add(soundOffItem);
-//
-//		wordsItem.addActionListener(new ItemActionListener());
-//		toeicwordsItem.addActionListener(new ItemActionListener());
-//		soundOnItem.addActionListener(new ItemActionListener());
-//		soundOffItem.addActionListener(new ItemActionListener());
-//		
-//	}
-//	
-//	class ItemActionListener implements ActionListener {
-//
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			
-//			String cmd = e.getActionCommand(); // 메뉴 아이템의 문자열 리턴
-//			
-//			switch(cmd) {
-//			case "words.txt":
-//				GameManagement.fileName = ("words.txt");
-//				JOptionPane.showMessageDialog(c, GameManagement.fileName + " 선택됨",
-//					"Message", JOptionPane.ERROR_MESSAGE);
-//				break;
-//			case "toeicwords.txt":
-//				GameManagement.fileName = ("toeicwords.txt");
-//				JOptionPane.showMessageDialog(c, GameManagement.fileName + " 선택됨",
-//						"Message", JOptionPane.ERROR_MESSAGE);
-//				break;
-//			case "sound on":
-//				audio.playAudio("startFrame");
-//				JOptionPane.showMessageDialog(c, "배경음악 시작",
-//						"Message", JOptionPane.ERROR_MESSAGE);
-//				break;
-//			case "sound off":
-//				audio.stopAudio("startFrame");
-//				JOptionPane.showMessageDialog(c, "배경음악 중지",
-//						"Message", JOptionPane.ERROR_MESSAGE);
-//				break;
-//	
-//			}
-//		}
-//		
-//	}
+	private void makeMenu() {
 	
-//	private void makePanels() {
-//		
-//		startFrameNorthPanel = new StartFrameNorthPanel();
-//		startFrameCenterPanel = new StartFrameCenterPanel(); 
-//		startFrameSouthPanel = new StartFrameSouthPanel(this, audio);
-//		
-//		contentPane.add(startFrameNorthPanel, BorderLayout.NORTH);
-//		contentPane.add(startFrameCenterPanel, BorderLayout.CENTER);
-//		contentPane.add(startFrameSouthPanel, BorderLayout.SOUTH);
-//		
-//	}
+		JMenuBar menuBar = new JMenuBar();
+		this.setJMenuBar(menuBar);
+		
+		// 메뉴
+		JMenu fileMenu = new JMenu("File");
+		JMenu soundMenu = new JMenu("Sound");
+		
+		// 메뉴를 메뉴바에 부착
+		menuBar.add(fileMenu); 
+		menuBar.add(soundMenu);
+		
+		// 메뉴 아이템
+		JMenuItem wordsItem = new JMenuItem("words.txt");
+		JMenuItem toeicwordsItem = new JMenuItem("toeicwords.txt");
+		
+		JMenuItem soundOnItem = new JMenuItem("sound on");
+		JMenuItem soundOffItem = new JMenuItem("sound off");
+		
+		// 메뉴 아이템을 메뉴에 부착
+		fileMenu.add(wordsItem);
+		fileMenu.addSeparator();
+		fileMenu.add(toeicwordsItem);
+		soundMenu.add(soundOnItem);
+		soundMenu.addSeparator(); 
+		soundMenu.add(soundOffItem);
+
+		wordsItem.addActionListener(new ItemActionListener());
+		toeicwordsItem.addActionListener(new ItemActionListener());
+		soundOnItem.addActionListener(new ItemActionListener());
+		soundOffItem.addActionListener(new ItemActionListener());
+		
+	}
+	
+	class ItemActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			String cmd = e.getActionCommand(); // 메뉴 아이템의 문자열 리턴
+			
+			switch(cmd) {
+			case "words.txt":
+				GameManagement.fileName = ("words.txt");
+				JOptionPane.showMessageDialog(c, GameManagement.fileName + " 선택됨",
+					"Message", JOptionPane.ERROR_MESSAGE);
+				break;
+			case "toeicwords.txt":
+				GameManagement.fileName = ("toeicwords.txt");
+				JOptionPane.showMessageDialog(c, GameManagement.fileName + " 선택됨",
+						"Message", JOptionPane.ERROR_MESSAGE);
+				break;
+			case "sound on":
+				audio.playAudio("startFrame");
+				JOptionPane.showMessageDialog(c, "배경음악 시작",
+						"Message", JOptionPane.ERROR_MESSAGE);
+				break;
+			case "sound off":
+				audio.stopAudio("startFrame");
+				JOptionPane.showMessageDialog(c, "배경음악 중지",
+						"Message", JOptionPane.ERROR_MESSAGE);
+				break;
+	
+			}
+		}
+		
+	}
 	
 }

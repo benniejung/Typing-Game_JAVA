@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,25 +30,14 @@ public class ProfileAndScorePanel extends JPanel {
 		setBackground(Color.white);
 		
 		setLayout(null);
-		
-		// makeNameLabel(); // 이름 레이블 부착
+        Color borderColor = new Color(21,40,90);
+        this.setBorder(BorderFactory.createLineBorder(borderColor, 5));
+
 		makeProfileLabel(); // 프로필 레이블 부착
 		makeScoreLabel(); // 점수 레이블 부착
 		makeLifeLabel(); // 생명 레이블 부착
 	}
-	
-//	public void makeNameLabel() {
-//		
-//		nameLabel.setFont(defaultFont);
-//		nameLabel.setSize(100, 30);
-//		nameLabel.setLocation(100,30);
-//		nameLabel.setHorizontalAlignment(JLabel.CENTER);
-//		nameLabel.setOpaque(true);
-//		nameLabel.setBackground(Color.WHITE);
-//		this.add(nameLabel);
-//		
-//	}
-	
+		
 	public void makeProfileLabel() {
 		
 		profileIcon = new ImageIcon("image/profile/부기얼굴.png");
@@ -66,13 +56,13 @@ public class ProfileAndScorePanel extends JPanel {
 		JLabel scoreLabelText = new JLabel("Score");
 		scoreLabelText.setFont(defaultFont);
 		scoreLabelText.setSize(100, 30);
-		scoreLabelText.setLocation(100 ,100);
+		scoreLabelText.setLocation(100 ,20);
 		scoreLabelText.setHorizontalAlignment(JLabel.CENTER);
 		this.add(scoreLabelText);
 		
 		scoreLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		scoreLabel.setSize(100, 30);
-		scoreLabel.setLocation(100 ,135);
+		scoreLabel.setLocation(100 ,60);
 		scoreLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		this.add(scoreLabel);
@@ -82,28 +72,28 @@ public class ProfileAndScorePanel extends JPanel {
 		JLabel lifeLabelText = new JLabel("Life");
 		lifeLabelText.setFont(defaultFont);
 		lifeLabelText.setSize(100, 30);
-		lifeLabelText.setLocation(100 ,160);
+		lifeLabelText.setLocation(100 ,110);
 		lifeLabelText.setHorizontalAlignment(JLabel.CENTER);
 		this.add(lifeLabelText);
 		
 		ImageIcon lifeIcon = new ImageIcon("image/character/상찌얼굴.png");
 		JLabel lifeImageLabel = new JLabel(lifeIcon);
 		lifeImageLabel.setSize(100, 50);
-		lifeImageLabel.setLocation(80 ,210);
+		lifeImageLabel.setLocation(70 ,150);
 		lifeImageLabel.setHorizontalAlignment(JLabel.CENTER);
 		this.add(lifeImageLabel);
 		
 		JLabel xLabel = new JLabel("X");
 		xLabel.setFont(defaultFont);
 		xLabel.setSize(100, 30);
-		xLabel.setLocation(140 ,210);
+		xLabel.setLocation(120 ,160);
 		xLabel.setHorizontalAlignment(JLabel.CENTER);
 		this.add(xLabel);
 
 		lifeLabel = new JLabel(Integer.toString(GameManagement.life));
-		lifeLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		lifeLabel.setFont(defaultFont);
 		lifeLabel.setSize(100, 30);
-		lifeLabel.setLocation(180 ,210);
+		lifeLabel.setLocation(150 ,160);
 		lifeLabel.setHorizontalAlignment(JLabel.CENTER);
 		this.add(lifeLabel);
 		
