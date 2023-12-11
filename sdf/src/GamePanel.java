@@ -53,6 +53,7 @@ public class GamePanel extends JPanel {
     
     // 랭킹 확인 프레임을 생성을 위한 레퍼런스 선언
     private RankingFrame RankingFrame;
+    private UserRankingFrame userRankingFrame;
 	
     // 생성자
     public GamePanel(GameFrame gameFrame, WordList wordList, ProfileAndScorePanel profileAndScorePanel, Audio audio) {
@@ -241,9 +242,9 @@ public class GamePanel extends JPanel {
     		gameThread.interrupt(); // 게임 스레드 종료
     		this.removeAll(); // 화면 정지
     		audio.closeAudio("gameBackground"); 
-    		// JOptionPane.showMessageDialog(gameFrame, "Game Over", "Game Over", JOptionPane.ERROR_MESSAGE); // 팝업 띄우기
-    		GameResultModal gameResultModal = new GameResultModal(minLabel, secLabel);
-    		gameFrame.dispose(); // gameFrame 종료
+    		//JOptionPane.showMessageDialog(gameFrame, "Game Over", "Game Over", JOptionPane.ERROR_MESSAGE); // 팝업 띄우기
+    		GameResultModal gameResultModal = new GameResultModal(minLabel.getText(), secLabel.getText());
+    		//gameFrame.dispose(); // gameFrame 종료
     		GameManagement.score = profileAndScorePanel.getScore();
     		RankingFrame = new RankingFrame(profileAndScorePanel);// 랭킹 확인 프레임 띄우기
     		audio.playAudio("gameEnded"); // 게임 종료 배경 음악 시작

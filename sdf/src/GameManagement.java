@@ -10,7 +10,7 @@ public class GameManagement {
 	public static String pathName = null;
 	public static String fileName = null;
 	public static int score = 0;
-	public static int life = 5;
+	public static int life = 0;
 
 	
 }
